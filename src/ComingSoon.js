@@ -32,32 +32,33 @@ export default function ComingSoon() {
         </form>
 
         <div className="social-icons">
-          <a
-            href="#"
-            onClick={(e) => e.preventDefault()}
-            aria-label="Twitter (disabled)"
-            aria-disabled="true"
-            style={{ cursor: "not-allowed", color: "gray" }}
-          >
-            <FaTwitter />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/dembe-kwinda-4461b4237"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            <FaLinkedin />
-          </a>
-          <a
-            href="https://github.com/ScarySuffer"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-          >
-            <FaGithub />
-          </a>
-        </div>
+            <button
+                className="link-style-button"
+                onClick={(e) => e.preventDefault()}
+                aria-label="Twitter (disabled)"
+                disabled
+                style={{ cursor: "not-allowed", color: "gray", background: "none", border: "none", padding: 0 }}
+                >
+                <FaTwitter />
+                </button>
+            <a
+                href="https://www.linkedin.com/in/dembe-kwinda-4461b4237"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+            >
+                <FaLinkedin />
+            </a>
+            <a
+                href="https://github.com/ScarySuffer"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+            >
+                <FaGithub />
+            </a>
+            </div>
+
       </div>
     </div>
   );
