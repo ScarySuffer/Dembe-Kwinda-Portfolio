@@ -55,12 +55,14 @@ export default function Navbar() {
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   const navLinks = [
-    { path: "/", label: "Home" },
-    { path: "/resume", label: "Resume" },
-    { path: "/projects", label: "Projects" },
-    { path: "/contact", label: "Contact" },
-    { path: "/certificates", label: "Certificates" },
-  ];
+  { path: "/", label: "Home" },
+  { path: "/resume", label: "Resume" },
+  { path: "/projects", label: "Projects" },
+  { path: "/contact", label: "Contact" },
+  { path: "/certificates", label: "Certificates" },
+  { path: "/coming-soon", label: "Coming Soon" },
+];
+
 
   return (
     <>
