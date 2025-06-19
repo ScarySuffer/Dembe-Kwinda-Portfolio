@@ -1,0 +1,61 @@
+/* index.css - global reset and base styles */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f2f6fa;
+  color: #222222;
+  line-height: 1.6;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.navbar, .nav-link {
+  color: #fff !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #0056b3 !important;
+  color: #fff !important;
+}
+
+/* Utility classes */
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.bg-primary {
+  background-color: #007bff !important;
+}
+
+/* Responsive fixes for small screens */
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+}

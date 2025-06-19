@@ -1,0 +1,184 @@
+/* Navbar.css */
+
+/* Base navbar link styles */
+.navbar .nav-link {
+  font-size: 1.8rem; /* Increased */
+  padding: 0.9rem 1.5rem; /* Increased spacing */
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+/* Brand text styling */
+.navbar .navbar-brand {
+  font-size: 2.5rem; /* Bigger brand text */
+  font-weight: bold;
+  color: #000;
+  transition: color 0.3s ease;
+}
+
+/* Responsive fonts for mobile screens */
+@media (max-width: 768px) {
+  .navbar .nav-link {
+    font-size: 1.5rem; /* Bigger for mobile */
+    padding: 0.7rem 1.2rem;
+  }
+
+  .navbar .navbar-brand {
+    font-size: 2rem;
+  }
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  --navbar-bg: #1f1f1f;
+  --navbar-link-color: #f1f1f1;
+  --navbar-link-hover: #66b2ff;
+
+  --sidebar-bg: #222;
+  --sidebar-link-color: #ccc;
+  --sidebar-link-hover-bg: #3399ff;
+
+  --btn-dark-bg: #222;
+  --btn-dark-color: #eee;
+  --btn-dark-border: #444;
+
+  --overlay-bg: rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .navbar {
+  background-color: var(--navbar-bg) !important;
+}
+
+body.dark-mode .navbar .nav-link,
+body.dark-mode .navbar .navbar-brand {
+  color: var(--navbar-link-color) !important;
+}
+
+body.dark-mode .navbar .nav-link:hover,
+body.dark-mode .navbar .nav-link:focus {
+  color: var(--navbar-link-hover) !important;
+}
+
+/* Brighter hamburger icon in dark mode */
+body.dark-mode .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Hide default Bootstrap collapse on mobile */
+.navbar-collapse {
+  display: none !important;
+}
+
+/* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px; /* hidden off-screen */
+  width: 250px;
+  height: 100vh;
+  background-color: #f8f9fa;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  padding-top: 60px; /* navbar height */
+  transition: left 0.3s ease;
+  z-index: 1040;
+  overflow-y: auto;
+}
+
+body.dark-mode .sidebar {
+  background-color: var(--sidebar-bg);
+  box-shadow: 2px 0 8px rgba(255, 255, 255, 0.15);
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.sidebar-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 15px 20px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+body.dark-mode .sidebar-link {
+  color: var(--sidebar-link-color);
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background-color: #007bff;
+  color: white;
+}
+
+body.dark-mode .sidebar-link:hover,
+body.dark-mode .sidebar-link.active {
+  background-color: var(--sidebar-link-hover-bg);
+  color: white;
+}
+
+/* Overlay for sidebar */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1030;
+}
+
+body.dark-mode .sidebar-overlay {
+  background-color: var(--overlay-bg);
+}
+
+/* Show desktop navbar links */
+@media (min-width: 992px) {
+  .sidebar,
+  .sidebar-overlay {
+    display: none;
+  }
+  .navbar-collapse {
+    display: flex !important;
+  }
+}
+
+/* Sidebar toggle container styling */
+.sidebar-toggle-container {
+  padding: 20px;
+  border-top: 1px solid #ddd;
+}
+
+/* Override button colors in dark mode */
+body.dark-mode .btn-dark {
+  background-color: var(--btn-dark-bg) !important;
+  color: var(--btn-dark-color) !important;
+  border-color: var(--btn-dark-border) !important;
+}
+
+body.dark-mode .btn-outline-dark {
+  color: var(--btn-dark-color) !important;
+  border-color: var(--btn-dark-color) !important;
+}
+
+body.dark-mode .btn-outline-dark:hover {
+  background-color: #444 !important;
+  color: #fff !important;
+}

@@ -1,0 +1,222 @@
+/* Projects.css */
+
+.project-container {
+  max-width: 2040px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-header {
+  text-align: center;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #004080;
+  padding-bottom: 20px;
+  transition: border-color 0.4s ease;
+}
+
+.project-header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: #002244;
+  transition: color 0.4s ease;
+}
+
+.project-header p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 10px;
+  transition: color 0.4s ease;
+}
+
+.project-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.project-card {
+  flex: 1 1 300px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+
+  /* Initial state for animation */
+  opacity: 0;   
+  transform: translateY(20px);
+  animation-fill-mode: forwards;
+  animation-name: fadeSlideUpCard;
+  animation-duration: 1.5s;  /* <-- Slowed down here */
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+
+/* Animation keyframes */
+@keyframes fadeSlideUpCard {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-card:hover {
+  background-color: #e6f0ff;
+  transform: scale(1.04) translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 64, 128, 0.15);
+}
+
+.project-card h3 {
+  color: #0066cc;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+}
+
+.project-card p {
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  transition: color 0.3s ease;
+}
+
+.project-card .tech-stack {
+  font-size: 0.9rem;
+  color: #777;
+  font-style: italic;
+}
+
+.project-card .view-button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background-color: #0066cc;
+  color: white;
+  border: 2px solid #005bb5;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.project-card .view-button:hover {
+  background-color: #005bb5;
+  box-shadow: 0 4px 12px rgba(0, 91, 181, 0.5);
+  transform: scale(1.05);
+}
+
+/* Pulse animation for icons */
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.75;
+  }
+}
+
+.project-icon {
+  font-size: 2.5rem;
+  color: #004080;
+  margin-bottom: 10px;
+  text-align: center;
+  animation: iconPulse 2.5s ease-in-out infinite;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .project-header h1 {
+    font-size: 2rem;
+  }
+
+  .project-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Dark mode overrides */
+body.dark-mode .project-container {
+  background: #121212;
+  color: #e0e0e0;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .project-header {
+  border-bottom-color: #3399ff;
+}
+
+body.dark-mode .project-header h1 {
+  color: #9ecfff;
+}
+
+body.dark-mode .project-header p {
+  color: #bbb;
+}
+
+body.dark-mode .project-card {
+  background-color: #1e1e1e;
+  border-color: #444;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+  color: #ddd;
+}
+
+body.dark-mode .project-card:hover {
+  background-color: #265fbb;
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(38, 95, 187, 0.9);
+}
+
+body.dark-mode .project-card h3 {
+  color: #a3c8ff;
+}
+
+body.dark-mode .project-card p,
+body.dark-mode .project-card .tech-stack {
+  color: #ccc;
+}
+
+body.dark-mode .project-card .view-button {
+  background-color: transparent;
+  border-color: #66b3ff;
+  color: #bbd4ff;
+}
+
+body.dark-mode .project-card .view-button:hover {
+  background-color: #66b3ff;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(102, 179, 255, 0.8);
+}
+
+body.dark-mode .project-icon {
+  color: #66b3ff;
+}
+.tech-badge {
+  display: inline-block;
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  margin-right: 6px;
+  margin-top: 4px;
+}
+
+.view-button.github {
+  background-color: #24292e;
+  color: #fff;
+}
