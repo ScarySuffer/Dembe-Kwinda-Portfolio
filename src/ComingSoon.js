@@ -33,18 +33,28 @@ export default function ComingSoon() {
 
         <div className="social-icons">
           <a
-            <button className="link-style-button">Coming Soon</button>
-
+            href="#"
             onClick={(e) => e.preventDefault()}
             aria-label="Twitter (disabled)"
+            aria-disabled="true"
             style={{ cursor: "not-allowed", color: "gray" }}
-            >
+          >
             <FaTwitter />
-            </a>
-          <a href="https:// www.linkedin.com/in/dembe-kwinda-4461b4237" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          </a>
+          <a
+            href="https://www.linkedin.com/in/dembe-kwinda-4461b4237"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
             <FaLinkedin />
           </a>
-          <a href="https://github.com/ScarySuffer" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <a
+            href="https://github.com/ScarySuffer"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+          >
             <FaGithub />
           </a>
         </div>
