@@ -33,7 +33,8 @@ export default function ComingSoon() {
 
         <div className="social-icons">
           <a
-            href="#"
+            <button className="link-style-button">Coming Soon</button>
+
             onClick={(e) => e.preventDefault()}
             aria-label="Twitter (disabled)"
             style={{ cursor: "not-allowed", color: "gray" }}
