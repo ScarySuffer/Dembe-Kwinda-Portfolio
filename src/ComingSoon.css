@@ -20,8 +20,8 @@
   content: "";
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
-  animation: float 25s linear infinite;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent 70%);
+  animation: float 25s ease-in-out infinite;
   z-index: 0;
 }
 
@@ -55,7 +55,7 @@
 .content {
   max-width: 500px;
   width: 100%;
-  position: relative; /* ensures content is above the blobs */
+  position: relative;
   z-index: 1;
 }
 
@@ -84,6 +84,12 @@ p {
   width: 70%;
   max-width: 300px;
   font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.notify-form input:focus {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
 }
 
 .notify-form button {
@@ -101,10 +107,17 @@ p {
   background-color: #e3f2fd;
 }
 
+.social-icons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
 .social-icons a {
   color: #fff;
   font-size: 1.5rem;
-  margin: 0 10px;
   transition: color 0.3s ease-in-out;
 }
 

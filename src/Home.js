@@ -48,7 +48,7 @@ export default function Home() {
       title: "Arduino Robotics & Automation",
       description:
         "Embedded systems using sensors, actuators, and Arduino to automate mechanical processes.",
-      url: "https://github.com/dembekwinda/arduino-robotics",
+      route: "/coming-soon",
       image: "/images/projects/arduino.png",
       tech: ["Arduino", "C++", "Sensors"],
     },
@@ -56,7 +56,7 @@ export default function Home() {
       title: "Flutter Mobile Apps",
       description:
         "Cross-platform mobile apps built with Flutter and Firebase for authentication and real-time databases.",
-      url: "https://github.com/dembekwinda/flutter-mobile-apps",
+      route: "/coming-soon",
       image: "/images/projects/My APP.png",
       tech: ["Flutter", "Dart", "Firebase"],
     },
@@ -64,7 +64,7 @@ export default function Home() {
       title: "Full-Stack Web Development",
       description:
         "Responsive websites and REST APIs using React, Node.js, Express, and MongoDB.",
-      url: "https://github.com/dembekwinda/fullstack-web-development",
+      route: "/coming-soon",
       image: "/images/projects/fullstack.png",
       tech: ["MERN", "REST API"],
     },
@@ -72,7 +72,7 @@ export default function Home() {
       title: "Embedded Systems Programming",
       description:
         "Microcontroller programming for sensor acquisition and logic control in IoT and mechatronics.",
-      url: "https://github.com/dembekwinda/embedded-systems",
+      route: "/coming-soon",
       image: "/images/projects/embedded.png",
       tech: ["C", "IoT", "Microcontrollers"],
     },
@@ -80,7 +80,7 @@ export default function Home() {
       title: "OpenStreetMap Integration",
       description:
         "Location-aware mobile apps with OpenStreetMap and Flutter Map for real-time tracking and mapping.",
-      url: "https://github.com/dembekwinda/openstreetmap-integration",
+      route: "/coming-soon",
       image: "/images/projects/openstreetmap.png",
       tech: ["Flutter", "OpenStreetMap", "Geolocation"],
     },
@@ -88,7 +88,7 @@ export default function Home() {
       title: "Bookverse",
       description:
         "A book discovery and review platform that connects readers through community-driven experiences.",
-      url: "https://github.com/dembekwinda/bookverse",
+      route: "/coming-soon",
       image: "/images/projects/open-book.png",
       tech: ["React", "MongoDB", "Node.js"],
     },
