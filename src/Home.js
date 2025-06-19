@@ -1,14 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
-
 export default function Home() {
   const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     document.body.classList.toggle("dark-mode", savedTheme === "dark");
     document.body.classList.toggle("light-mode", savedTheme !== "dark");
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const projects = [
@@ -89,20 +96,11 @@ export default function Home() {
 
   return (
     <div className="project-container">
-      <header
-        className="project-header"
-        style={{ display: "flex", alignItems: "center", gap: "20px" }}
-      >
+      <header className="project-header">
         <img
           src="/dembe.jpg"
           alt="Dembe Kwinda"
-          style={{
-            width: "120px",
-            height: "120px",
-            borderRadius: "50%",
-            objectFit: "cover",
-            boxShadow: "0 0 8px rgba(0,0,0,0.15)",
-          }}
+          className={`profile-image ${scrolled ? "small" : "large"}`}
           loading="lazy"
         />
         <div>
@@ -123,76 +121,77 @@ export default function Home() {
       <section className="section projects">
         <h2>Highlighted Projects</h2>
         <div className="project-grid">
-          {projects.map(({ title, description, url, route, image, tech, github }, index) => (
-            <div
-              className="project-card"
-              key={title}
-              title={title}
-              style={{
-                animation: "fadeSlideUpCard 0.5s ease forwards",
-                animationDelay: `${index * 0.1}s`,
-              }}
-            >
-              <img
-                src={image}
-                alt={`Screenshot of ${title}`}
-                className="project-image"
-                loading="lazy"
-                style={{ width: "100%", borderRadius: "8px", marginBottom: "12px" }}
-              />
-              <h3>{title}</h3>
-              <p>{description}</p>
-
-              {tech && (
-                <div className="tech-tags">
-                  {tech.map((t) => (
-                    <span key={t} className="tech-badge">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              )}
-
+          {projects.map(
+            (
+              { title, description, url, route, image, tech, github },
+              index
+            ) => (
               <div
-                className="project-links"
-                style={{ marginTop: "10px", display: "flex", gap: "10px" }}
+                className="project-card"
+                key={title}
+                title={title}
+                style={{
+                  animation: "fadeSlideUpCard 0.5s ease forwards",
+                  animationDelay: `${index * 0.1}s`,
+                }}
               >
-                {route ? (
-                  <button className="view-button" onClick={() => navigate(route)}>
-                    Open
-                  </button>
-                ) : (
-                  <a
-                    href={url}
-                    className="view-button"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Project
-                  </a>
+                <img
+                  src={image}
+                  alt={`Screenshot of ${title}`}
+                  className="project-image"
+                  loading="lazy"
+                />
+                <h3>{title}</h3>
+                <p>{description}</p>
+
+                {tech && (
+                  <div className="tech-tags">
+                    {tech.map((t) => (
+                      <span key={t} className="tech-badge">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 )}
 
-                {github && (
-                  <a
-                    href={github}
-                    className="view-button github"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="View source code on GitHub"
-                  >
-                    GitHub
-                  </a>
-                )}
+                <div className="project-links">
+                  {route ? (
+                    <button
+                      className="view-button"
+                      onClick={() => navigate(route)}
+                    >
+                      Open
+                    </button>
+                  ) : (
+                    <a
+                      href={url}
+                      className="view-button"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Project
+                    </a>
+                  )}
+
+                  {github && (
+                    <a
+                      href={github}
+                      className="view-button github"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="View source code on GitHub"
+                    >
+                      GitHub
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
       </section>
 
-      <section
-        className="section connect"
-        style={{ textAlign: "center", marginTop: "40px" }}
-      >
+      <section className="section connect">
         <h2>Connect</h2>
         <p>
           <a

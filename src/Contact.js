@@ -72,25 +72,15 @@ export default function Contact() {
           <li>
             <FaLinkedin aria-hidden="true" /> <strong>LinkedIn:</strong>{" "}
             <a
-              href="https://www.linkedin.com/in/dembe-kwinda-76a45a1b9"
+              href="https://www.linkedin.com/in/dembe-kwinda-4461b4237"
               target="_blank"
               rel="noopener noreferrer"
             >
-              linkedin.com/in/dembe-kwinda
+              linkedin.com/in/dembe-kwinda-4461b4237
             </a>
           </li>
           <li>
             <FaGithub aria-hidden="true" /> <strong>GitHub:</strong>{" "}
-            <a
-              href="https://github.com/demcode3"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              github.com/demcode3
-            </a>
-          </li>
-          <li>
-            <FaGithub aria-hidden="true" /> <strong>GitHub (ScarySuffer):</strong>{" "}
             <a
               href="https://github.com/ScarySuffer"
               target="_blank"
@@ -102,11 +92,11 @@ export default function Contact() {
           <li>
             <FaGlobe aria-hidden="true" /> <strong>Portfolio:</strong>{" "}
             <a
-              href="https://demcode3.github.io"
+              href="https://dembe-kwinda-portfolio.netlify.app"
               target="_blank"
               rel="noopener noreferrer"
             >
-              demcode3.github.io
+              dembe-kwinda-portfolio.netlify.app
             </a>
           </li>
         </ul>

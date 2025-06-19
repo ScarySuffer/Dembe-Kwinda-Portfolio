@@ -78,7 +78,7 @@
   box-shadow: 0 0 6px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.25s ease;
+  transition: box-shadow 0.5s ease; /* increase from 0.25s to 0.5s */
 }
 
 .project-card:hover {
@@ -176,4 +176,26 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+.profile-image {
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+  transition: width 2s ease, height 2s ease, box-shadow 2s ease, margin-right 2s ease;
+  margin-right: 20px;
+}
+
+/* Large image initially */
+.profile-image.large {
+  width: 300px;
+  height: 300px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+}
+
+/* Shrunk image after scroll */
+.profile-image.small {
+  width: 100px;
+  height: 100px;
+  margin-right: 15px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.12);
 }

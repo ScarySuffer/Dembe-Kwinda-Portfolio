@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Navbar.css";
 
 export default function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => {
-    // Initialize from localStorage or default to light mode
-    return localStorage.getItem("theme") === "dark";
-  });
+  const [darkMode, setDarkMode] = useState(() =>
+    localStorage.getItem("theme") === "dark"
+  );
   const location = useLocation();
+  const navigate = useNavigate();
   const sidebarRef = useRef(null);
 
-  // Apply dark/light mode class to body on mount and when darkMode changes
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add("dark-mode");
@@ -25,7 +24,6 @@ export default function Navbar() {
     }
   }, [darkMode]);
 
-  // Close sidebar if clicking outside on mobile
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -40,13 +38,29 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [sidebarOpen]);
 
-  // Close sidebar on navigation
-  const handleNavLinkClick = () => {
+  const handleNavLinkClick = (path) => {
+    if (location.pathname !== path) {
+      navigate(path);
+    }
     setSidebarOpen(false);
   };
 
-  // Toggle dark/light mode
+  const handleNavLinkHover = (path) => {
+    if (location.pathname !== path) {
+      navigate(path);
+      // Note: Do NOT close sidebar here on hover
+    }
+  };
+
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
+
+  const navLinks = [
+    { path: "/", label: "Home" },
+    { path: "/resume", label: "Resume" },
+    { path: "/projects", label: "Projects" },
+    { path: "/contact", label: "Contact" },
+    { path: "/certificates", label: "Certificates" },
+  ];
 
   return (
     <>
@@ -68,19 +82,18 @@ export default function Navbar() {
           {/* Desktop nav links */}
           <div className="d-none d-lg-flex ms-auto align-items-center">
             <ul className="navbar-nav">
-              {[
-                { path: "/", label: "Home" },
-                { path: "/resume", label: "Resume" },
-                { path: "/projects", label: "Projects" },
-                { path: "/contact", label: "Contact" },
-                { path: "/certificates", label: "Certificates" },
-              ].map(({ path, label }) => (
+              {navLinks.map(({ path, label }) => (
                 <li className="nav-item" key={path}>
                   <Link
                     className={`nav-link ${
                       location.pathname === path ? "active" : ""
                     }`}
                     to={path}
+                    onMouseEnter={() => handleNavLinkHover(path)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (location.pathname !== path) navigate(path);
+                    }}
                   >
                     {label}
                   </Link>
@@ -110,23 +123,21 @@ export default function Navbar() {
         role="navigation"
       >
         <ul className="sidebar-nav">
-          {[
-            { path: "/", label: "Home" },
-            { path: "/resume", label: "Resume" },
-            { path: "/projects", label: "Projects" },
-            { path: "/contact", label: "Contact" },
-            { path: "/certificates", label: "Certificates" },
-          ].map(({ path, label }) => (
+          {navLinks.map(({ path, label }) => (
             <li key={path} className="sidebar-item">
-              <Link
-                to={path}
+              <a
+                href={path}
                 className={`sidebar-link ${
                   location.pathname === path ? "active" : ""
                 }`}
-                onClick={handleNavLinkClick}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavLinkClick(path);
+                }}
+                onMouseEnter={() => handleNavLinkHover(path)}
               >
                 {label}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
@@ -134,9 +145,7 @@ export default function Navbar() {
         {/* Dark/Light toggle in sidebar */}
         <div className="sidebar-toggle-container">
           <button
-            className={`btn ${
-              darkMode ? "btn-dark" : "btn-outline-dark"
-            } w-100`}
+            className={`btn ${darkMode ? "btn-dark" : "btn-outline-dark"} w-100`}
             onClick={() => {
               toggleDarkMode();
               setSidebarOpen(false); // optionally close sidebar on toggle

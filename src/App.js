@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import Navbar from "./Navbar";  // <-- import your Navbar component here
+import ComingSoon from './ComingSoon';
 
 import Home from "./Home";
 import Resume from "./resume";
@@ -54,6 +54,7 @@ export default function App() {
           <Route path="/contact" element={<Contact darkMode={darkMode} />} />
           <Route path="/weather" element={<WeatherForecast darkMode={darkMode} />} />
           <Route path="/certificates" element={<Certificates darkMode={darkMode} />} />
+          <Route path="/coming-soon" element={<ComingSoon />} />
         </Routes>
       </main>
     </Router>
