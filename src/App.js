@@ -9,6 +9,7 @@ import Projects from "./Projects";
 import Contact from "./Contact";
 import WeatherForecast from "./WeatherForecast";
 import Certificates from "./Certificates";
+import NotFound from './NotFound'; // Import the new NotFound component directly from src/
 
 import "./App.css";
 import "./index.css";
@@ -55,6 +56,8 @@ export default function App() {
           <Route path="/weather" element={<WeatherForecast darkMode={darkMode} />} />
           <Route path="/certificates" element={<Certificates darkMode={darkMode} />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
+          <Route path="*" element={<NotFound />} />
+          
         </Routes>
       </main>
     </Router>

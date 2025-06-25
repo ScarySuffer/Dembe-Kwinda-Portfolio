@@ -1,0 +1,79 @@
+/* src/NotFound.css */
+
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh; /* Takes up most of the viewport height */
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f8f8; /* Light background for light mode */
+  color: #333;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  
+  /* --- NEW TWEAKS BELOW --- */
+  max-width: 600px; /* Limit width on large screens */
+  margin: 40px auto; /* Center it with some margin */
+  border-radius: 10px; /* Slightly rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.not-found-container h1 {
+  font-size: 4em;
+  color: #dc3545; /* Red color for error */
+  margin-bottom: 20px;
+}
+
+.not-found-container p {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  line-height: 1.6; /* Improved readability */
+}
+
+.not-found-container a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 15px; /* Make link look more like a button */
+  border: 2px solid #007bff; /* Add a border */
+  border-radius: 5px; /* Rounded corners for the link */
+  transition: all 0.3s ease; /* Smooth transitions for hover */
+}
+
+.not-found-container a:hover {
+  text-decoration: none; /* Remove underline on hover */
+  background-color: #007bff; /* Fill background on hover */
+  color: white; /* White text on hover */
+}
+
+/* Dark mode styling for 404 page */
+body.dark-mode .not-found-container {
+  background-color: #282c34; /* Dark background */
+  color: #f8f8f8; /* Light text */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Darker shadow for dark mode */
+}
+
+body.dark-mode .not-found-container h1 {
+  color: #ff6b6b; /* Lighter red for dark mode */
+}
+
+body.dark-mode .not-found-container a {
+  color: #87cefa; /* Lighter blue for links in dark mode */
+  border-color: #87cefa; /* Border color for links in dark mode */
+}
+
+body.dark-mode .not-found-container a:hover {
+  background-color: #87cefa; /* Fill background on hover in dark mode */
+  color: #282c34; /* Dark text on hover in dark mode */
+}
+
+/* Responsive adjustment for smaller screens */
+@media (max-width: 768px) {
+  .not-found-container h1 {
+    font-size: 3em; /* Smaller font size for h1 on smaller screens */
+  }
+  .not-found-container p {
+    font-size: 1em; /* Smaller font size for p on smaller screens */
+  }
+}
