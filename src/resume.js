@@ -1,9 +1,34 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import html2pdf from "html2pdf.js";
 import './resume.css';
+import {
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaLinkedin,
+  FaGithub,
+  FaGlobe,
+  // Removed FaSun, FaMoon as they are no longer used in the button
+} from "react-icons/fa";
 
 export default function Resume() {
   const resumeRef = useRef();
+  // State to manage dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Effect to apply/remove dark mode class to the body and detect system preference
+  useEffect(() => {
+  const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+
+  // Set once at mount
+  setIsDarkMode(prefersDarkMode.matches);
+
+  const handler = (event) => setIsDarkMode(event.matches);
+  prefersDarkMode.addEventListener('change', handler);
+
+  return () => prefersDarkMode.removeEventListener('change', handler);
+}, []); // ✅ Removed `isDarkMode` from deps
+
 
   const generatePDF = () => {
     const element = resumeRef.current;
@@ -19,42 +44,43 @@ export default function Resume() {
     html2pdf().set(options).from(element).save();
   };
 
+ 
+
   return (
     <div>
-      <button
-        onClick={generatePDF}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          padding: "10px 15px",
-          marginBottom: "20px",
-          backgroundColor: "#007bff",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
-          fontSize: "16px",
-        }}
-        aria-label="Download Resume as PDF"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          fill="currentColor"
-          viewBox="0 0 16 16"
+      <div style={{ display: "flex", gap: "15px", marginBottom: "20px" }}>
+        <button
+          onClick={generatePDF}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            padding: "10px 15px",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            fontSize: "16px",
+          }}
+          aria-label="Download Resume as PDF"
         >
-          <path d="M.5 9.9a.5.5 0 0 1 .5-.4h4v-5a.5.5 0 0 1 1 0v5h4a.5.5 0 0 1 .4.8l-5 5a.5.5 0 0 1-.8 0l-5-5zM.5 15a.5.5 0 0 1 0-1h15a.5.5 0 0 1 0 1H.5z" />
-        </svg>
-        Download PDF
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            viewBox="0 0 16 16"
+          >
+            <path d="M.5 9.9a.5.5 0 0 1 .5-.4h4v-5a.5.5 0 0 1 1 0v5h4a.5.5 0 0 1 .4.8l-5 5a.5.5 0 0 1-.8 0l-5-5zM.5 15a.5.5 0 0 1 0-1h15a.5.5 0 0 1 0 1H.5z" />
+          </svg>
+          Download PDF
+        </button>
+      </div>
 
-      {/* Resume content */}
       <div
         ref={resumeRef}
-        className="container resume"
-        style={{ padding: "20px", background: "white", color: "#000" }}
+        className={`container resume ${isDarkMode ? 'dark-mode' : ''}`}
       >
         <header
           style={{
@@ -84,6 +110,26 @@ export default function Resume() {
           />
         </header>
 
+        <section className="contact-info" style={{ marginBottom: "20px" }}>
+          <h2>Contact Information</h2>
+          <ul>
+            <li>
+              <FaEnvelope aria-hidden="true" /> <strong>Email:</strong>{" "}
+              <a href="mailto:dembekwinda03@gmail.com">dembekwinda03@gmail.com</a> /{" "}
+              <a href="mailto:deekwinda@icloud.com">deekwinda@icloud.com</a>
+            </li>
+            <li>
+              <FaPhone aria-hidden="true" /> <strong>Phone:</strong>{" "}
+              <a href="tel:+27795205467">+27 79 520 5467</a> /{" "}
+              <a href="tel:+27694543677">+27 69 454 3677</a>
+            </li>
+            <li><FaMapMarkerAlt aria-hidden="true" /> <strong>Location:</strong> Clayville, Olifantsfontein, South Africa</li>
+            <li><FaLinkedin aria-hidden="true" /> <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/dembe-kwinda-4461b4237" target="_blank" rel="noopener noreferrer">linkedin.com/in/dembe-kwinda-4461b4237</a></li>
+            <li><FaGithub aria-hidden="true" /> <strong>GitHub:</strong> <a href="https://github.com/ScarySuffer" target="_blank" rel="noopener noreferrer">github.com/ScarySuffer</a></li>
+            <li><FaGlobe aria-hidden="true" /> <strong>Portfolio:</strong> <a href="https://dembe-kwinda-portfolio.netlify.app" target="_blank" rel="noopener noreferrer">dembe-kwinda-portfolio.netlify.app</a></li>
+          </ul>
+        </section>
+
         <section>
           <h2>Profile</h2>
           <p>
@@ -95,9 +141,8 @@ export default function Resume() {
           <h2>Personal Information</h2>
           <ul>
             <li><strong>ID:</strong> 0301025362080</li>
-            <li><strong>Postal Address:</strong><br />9723 Sante Street<br />Clayville<br />Olifantsfontein, 1666</li>
+            <li><strong>Postal Address:</strong><br />9723 Sante Street<br />Clayville<br />Olifantsfontein, Midrand,1666</li>
             <li><strong>Residential Address:</strong><br />Ha-Tshifura 438<br />Limpopo</li>
-            <li><strong>Email Addresses:</strong><br />dembekwinda03@gmail.com<br />deekwinda@icloud.com<br />s225485125@mandela.ac.za</li>
           </ul>
         </section>
 
@@ -184,7 +229,7 @@ export default function Resume() {
           <p><strong>Location:</strong> Makwarela Old – Christ The King Primary School</p>
 
           <h3>AOS Consulting Engineers – In-Service Training</h3>
-          <p><em>May 2024 – June 2024</em></p>
+          <p><em>April 2024 – May 2024</em></p>
           <ul>
             <li>Quality and snag list reports</li>
             <li>Meeting agendas and minutes</li>
@@ -219,13 +264,18 @@ export default function Resume() {
           <p>Feb 2021 – Dec 2021</p>
 
           <h3>B Eng Mechatronics – Nelson Mandela University</h3>
-          <p>Feb 2022 – Present</p>
+          <p>Feb 2022 – Dec 2024</p>
           <ul>
-            <li>Computer Science for Engineers 1A & 1B</li>
+            <li>Computer Science for Engineers 1A</li>
+            <li>Computer Science for Engineers 1B</li>
             <li>Mechanics and Thermodynamics</li>
-            <li>Physics, Mathematics, Electrotechnology</li>
-            <li>Engineering Drawing, Workshop Practice</li>
-          </ul>
+            <li>Computing Fundamentals for Engineering</li>
+            <li>Material Sciences 1</li>
+            <li>Mathematics 1A</li>
+            <li>Mathematics 1B</li>
+            <li>Engineering Drawing 1</li>
+            <li>Workshop Practice 1</li>
+        </ul>
         </section>
 
         <section>
