@@ -6,7 +6,7 @@
   font-size: 1.8rem;
   padding: 0.9rem 1.5rem;
   color: #000;
-  transition: color 2s ease-in-out;
+  transition: color 0.5s ease-in-out;
 }
 
 .navbar .nav-link::after {
@@ -17,7 +17,9 @@
   width: 0%;
   height: 2px;
   background-color: #007bff;
-  transition: width 1.5s ease-in-out;
+  /* !!! IMPORTANT TWEAK HERE !!! */
+  /* This transition property ensures both fade-in AND fade-out are smooth */
+  transition: width 0.7s ease-in-out; /* This line is correct as you have it, but its presence here is critical for the "fade out" */
 }
 
 .navbar .nav-link:hover,
@@ -144,7 +146,7 @@ body.dark-mode .sidebar {
   color: #333;
   text-decoration: none;
   font-weight: 500;
-  transition: color 1.2s ease-in-out;
+  transition: color 0.5s ease-in-out;
 }
 
 .sidebar-link::after {
@@ -155,7 +157,9 @@ body.dark-mode .sidebar {
   width: 0%;
   height: 2px;
   background-color: #007bff;
-  transition: width 1.5s ease-in-out;
+  /* !!! IMPORTANT TWEAK HERE !!! */
+  /* This transition property ensures both fade-in AND fade-out are smooth */
+  transition: width 0.7s ease-in-out; /* This line is correct as you have it, but its presence here is critical for the "fade out" */
 }
 
 .sidebar-link:hover,
