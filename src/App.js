@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar";  // <-- import your Navbar component here
+import Navbar from "./Navbar";
 import ComingSoon from './ComingSoon';
 
 import Home from "./Home";
@@ -9,7 +9,8 @@ import Projects from "./Projects";
 import Contact from "./Contact";
 import WeatherForecast from "./WeatherForecast";
 import Certificates from "./Certificates";
-import NotFound from './NotFound'; // Import the new NotFound component directly from src/
+import NotFound from './NotFound';
+import Dashboard from './Dashboard';         // 🔥 NEW IMPORT for crypto charts
 
 import "./App.css";
 import "./index.css";
@@ -44,9 +45,7 @@ export default function App() {
 
   return (
     <Router>
-      {/* Render Navbar component here */}
       <Navbar />
-
       <main>
         <Routes>
           <Route path="/" element={<Home darkMode={darkMode} />} />
@@ -56,8 +55,8 @@ export default function App() {
           <Route path="/weather" element={<WeatherForecast darkMode={darkMode} />} />
           <Route path="/certificates" element={<Certificates darkMode={darkMode} />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
+          <Route path="/dashboard" element={<Dashboard darkMode={darkMode} />} />  {/* 🟢 Added Route */}
           <Route path="*" element={<NotFound />} />
-          
         </Routes>
       </main>
     </Router>

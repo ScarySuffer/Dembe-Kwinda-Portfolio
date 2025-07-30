@@ -1,5 +1,3 @@
-/* Projects.css */
-
 .project-container {
   max-width: 2040px;
   margin: 40px auto;
@@ -50,13 +48,12 @@
   cursor: pointer;
 
   /* Initial state for animation */
-  opacity: 0;   
+  opacity: 0;
   transform: translateY(20px);
   animation-fill-mode: forwards;
   animation-name: fadeSlideUpCard;
-  animation-duration: 1.5s;  /* <-- Slowed down here */
+  animation-duration: 1.5s;
   animation-timing-function: ease;
-  animation-fill-mode: forwards;
 }
 
 /* Animation keyframes */
@@ -92,12 +89,37 @@
   transition: color 0.3s ease;
 }
 
+/* Updated tech stack container for badges */
 .project-card .tech-stack {
-  font-size: 0.9rem;
-  color: #777;
-  font-style: italic;
+  font-size: 0;
+  margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
 }
 
+/* Tech badges */
+.tech-badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  background-color: #e0e0e0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect on badges when card is hovered */
+.project-card:hover .tech-badge {
+  background-color: #0066cc;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.5);
+}
+
+/* Buttons */
 .project-card .view-button {
   margin-top: 15px;
   padding: 8px 16px;
@@ -109,12 +131,21 @@
   text-decoration: none;
   display: inline-block;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
 }
 
-.project-card .view-button:hover {
+.project-card .view-button:hover,
+.project-card .view-button:focus {
   background-color: #005bb5;
   box-shadow: 0 4px 12px rgba(0, 91, 181, 0.5);
   transform: scale(1.05);
+  outline: none;
+}
+
+/* GitHub button style */
+.view-button.github {
+  background-color: #24292e;
+  color: #fff;
 }
 
 /* Pulse animation for icons */
@@ -196,27 +227,14 @@ body.dark-mode .project-card .view-button {
   color: #bbd4ff;
 }
 
-body.dark-mode .project-card .view-button:hover {
+body.dark-mode .project-card .view-button:hover,
+body.dark-mode .project-card .view-button:focus {
   background-color: #66b3ff;
   color: #fff;
   box-shadow: 0 4px 12px rgba(102, 179, 255, 0.8);
+  outline: none;
 }
 
 body.dark-mode .project-icon {
   color: #66b3ff;
-}
-.tech-badge {
-  display: inline-block;
-  background-color: #e0e0e0;
-  color: #333;
-  padding: 3px 8px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  margin-right: 6px;
-  margin-top: 4px;
-}
-
-.view-button.github {
-  background-color: #24292e;
-  color: #fff;
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+
 export default function Home() {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -38,8 +39,18 @@ export default function Home() {
       github: "https://github.com/Kasi-Digital-Budgetly/budgetly-finance-tracker",
     },
     {
+      title: "Crypto Price Tracker with ETL + Dashboard",
+      description:
+        "A full-stack dashboard tracking real-time crypto prices and historical trends with ETL pipeline and chart visualizations.",
+      url: "http://13.48.59.188",
+      image: "/images/projects/crypto.png",
+      tech: ["React", "Node.js", "SQLite", "Express", "Recharts", "ETL"],
+      github: "https://github.com/yourusername/crypto-price-tracker-etl",
+    },
+    {
       title: "Weather Forecast App",
-      description: "Real-time weather forecast app using OpenWeatherMap API and React.",
+      description:
+        "Real-time weather forecast app using OpenWeatherMap API and React.",
       route: "/weather",
       image: "/images/projects/weather.png",
       tech: ["React", "OpenWeatherMap API"],
@@ -95,41 +106,50 @@ export default function Home() {
   ];
 
   return (
-    <div className="project-container">
-      <header className="project-header">
+    <main className="project-container">
+      <header className="project-header" role="banner">
         <img
           src="/dembe.jpg"
           alt="Dembe Kwinda"
           className={`profile-image ${scrolled ? "small" : "large"}`}
           loading="lazy"
+          width={scrolled ? 60 : 120}
+          height={scrolled ? 60 : 120}
         />
         <div>
-          <h1>Dembe Kwinda</h1>
-          <p>Software Developer</p>
+          <h1 tabIndex={0}>Dembe Kwinda</h1>
+          <p tabIndex={0}>Software Developer</p>
         </div>
       </header>
 
-      <section className="section about">
-        <h2>About Me</h2>
-        <p>
+      <section className="section about" aria-labelledby="about-heading">
+        <h2 id="about-heading">About Me</h2>
+        <p tabIndex={0}>
           I'm a passionate full-stack developer building modern web and mobile
           applications. I specialize in intuitive UIs and scalable systems.
           Currently exploring data science and cloud computing.
         </p>
       </section>
 
-      <section className="section projects">
-        <h2>Highlighted Projects</h2>
-        <div className="project-grid">
+      <section
+        className="section projects"
+        aria-labelledby="highlighted-projects-heading"
+      >
+        <h2 id="highlighted-projects-heading">Highlighted Projects</h2>
+        <div className="project-grid" role="list">
           {projects.map(
             (
               { title, description, url, route, image, tech, github },
               index
             ) => (
-              <div
-                className="project-card"
+              <article
                 key={title}
-                title={title}
+                className="project-card"
+                role="listitem"
+                tabIndex={0}
+                aria-describedby={`${title
+                  .replace(/\s+/g, "-")
+                  .toLowerCase()}-desc`}
                 style={{
                   animation: "fadeSlideUpCard 0.5s ease forwards",
                   animationDelay: `${index * 0.1}s`,
@@ -142,12 +162,14 @@ export default function Home() {
                   loading="lazy"
                 />
                 <h3>{title}</h3>
-                <p>{description}</p>
+                <p id={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}>
+                  {description}
+                </p>
 
                 {tech && (
-                  <div className="tech-tags">
+                  <div className="tech-tags" aria-label={`Technologies used in ${title}`} role="list">
                     {tech.map((t) => (
-                      <span key={t} className="tech-badge">
+                      <span key={t} className="tech-badge" role="listitem">
                         {t}
                       </span>
                     ))}
@@ -159,6 +181,7 @@ export default function Home() {
                     <button
                       className="view-button"
                       onClick={() => navigate(route)}
+                      aria-label={`Open project ${title}`}
                     >
                       Open
                     </button>
@@ -168,6 +191,7 @@ export default function Home() {
                       className="view-button"
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`View project ${title} in a new tab`}
                     >
                       View Project
                     </a>
@@ -180,30 +204,32 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       title="View source code on GitHub"
+                      aria-label={`View source code of ${title} on GitHub`}
                     >
                       GitHub
                     </a>
                   )}
                 </div>
-              </div>
+              </article>
             )
           )}
         </div>
       </section>
 
-      <section className="section connect">
-        <h2>Connect</h2>
-        <p>
+      <section className="section connect" aria-labelledby="connect-heading">
+        <h2 id="connect-heading">Connect</h2>
+        <p tabIndex={0}>
           <a
             href="https://www.linkedin.com/in/dembe-kwinda-4461b4237"
             target="_blank"
             rel="noopener noreferrer"
             className="view-button"
+            aria-label="Visit my LinkedIn profile (opens in a new tab)"
           >
             Visit my LinkedIn Profile
           </a>
         </p>
       </section>
-    </div>
+    </main>
   );
 }

@@ -1,36 +1,261 @@
-/* Resume Container */
-.container.resume {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px 30px;
-  background: #fff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  font-family: Tahoma, Geneva, Verdana, 'Segoe UI', sans-serif;
-  color: #222;
-  transition: background 0.3s ease, color 0.3s ease;
+/* src/components/resume.css */
+
+/* =======================
+   THEME VARIABLES FOR RESUME
+   Light Mode is the default defined here using generic variable names.
+========================= */
+:root {
+  --resume-bg-page: #f0f2f5; /* Light background for the overall page */
+  --resume-bg: #ffffff; /* Background for the main resume card and sidebars */
+  --resume-text-primary: #222;
+  --resume-text-secondary: #555; /* For subtitle, general text */
+  --resume-blue-primary: #0077cc; /* Main blue for headings, links, borders */
+  --resume-blue-secondary: #004a99; /* Darker blue for subheadings, strong text */
+  --resume-shadow: rgba(0, 0, 0, 0.1);
+  --resume-button-bg: #007bff;
+  --resume-button-hover: #0056b3;
 }
 
-/* Header */
+/* Dark Mode Overrides - these variables will redefine the generic names
+   when the .dark-mode class is active on a parent element. */
+.dark-mode {
+  --resume-bg-page: #2c2c2c;
+  --resume-bg: #1e1e1e;
+  --resume-text-primary: #f2f2f2;
+  --resume-text-secondary: #ccc;
+  --resume-blue-primary: #66b2ff;
+  --resume-blue-secondary: #3399ff;
+  --resume-shadow: rgba(255, 255, 255, 0.1);
+  --resume-button-bg: #3399ff;
+  --resume-button-hover: #1a8cff;
+}
+
+/* =======================
+   BASE STYLES (applies to both themes, or sets defaults)
+========================= */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  /* Apply theme variables directly from :root or .dark-mode override */
+  background-color: var(--resume-bg-page);
+  color: var(--resume-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* This rule ensures html/body also react to dark mode for overall page background/text.
+   It's crucial if .dark-mode is applied to html or body directly. */
+.dark-mode html, .dark-mode body {
+    background-color: var(--resume-bg-page);
+    color: var(--resume-text-primary);
+}
+
+
+.resume-page-wrapper {
+  min-height: calc(100vh - var(--navbar-height, 0px) - var(--footer-height, 0px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--navbar-height, 20px);
+  padding-bottom: var(--footer-height, 20px);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  /* Apply theme variables directly */
+  background-color: var(--resume-bg-page);
+  color: var(--resume-text-primary);
+}
+
+.pdf-button-container {
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.download-pdf-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--resume-button-bg);
+  color: white; /* This will be white in both modes, as defined by the button vars */
+}
+
+.download-pdf-button:hover {
+  background-color: var(--resume-button-hover);
+}
+
+.resume-grid-container {
+  display: grid;
+  grid-template-columns: 1fr minmax(600px, 900px) 1fr;
+  gap: 30px;
+  width: 100%;
+  max-width: 1400px;
+  flex-grow: 1;
+  align-items: start;
+  padding: 0 20px;
+}
+
+/* =======================
+   SIDEBARS FOR CHARTS
+========================= */
+.resume-sidebar {
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  min-height: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--resume-bg);
+  box-shadow: 0 0 10px var(--resume-shadow);
+  color: var(--resume-text-primary);
+}
+
+.resume-sidebar h3 {
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 15px;
+  text-align: center;
+  padding-bottom: 5px;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  color: var(--resume-blue-primary);
+  border-bottom: 1px solid var(--resume-blue-secondary);
+}
+
+/* Chart specific styling */
+.recharts-wrapper {
+  margin: 0 auto;
+}
+.recharts-surface {
+  overflow: visible; /* Removed !important */
+}
+.recharts-tooltip-wrapper {
+  z-index: 10;
+}
+
+/* NEW: Custom Recharts Tooltip Styling */
+.chart-tooltip {
+  border-radius: 5px;
+  padding: 10px;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--resume-bg);
+  border: 1px solid var(--resume-blue-secondary);
+  box-shadow: 0 2px 8px var(--resume-shadow);
+}
+
+.chart-tooltip-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  transition: color 0.3s ease;
+  color: var(--resume-blue-primary);
+}
+
+.chart-tooltip-item {
+  transition: color 0.3s ease;
+  color: var(--resume-text-primary);
+}
+
+/* NEW: Custom Recharts Legend Styling */
+.chart-legend {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  transition: color 0.3s ease;
+  color: var(--resume-text-primary);
+}
+
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.chart-legend-color-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.chart-legend-item-text {
+  transition: color 0.3s ease;
+  color: var(--resume-text-primary);
+}
+
+/* =======================
+   MAIN RESUME CONTAINER (Center Column)
+========================= */
+.container.resume {
+  margin: 0;
+  padding: 30px 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  background: var(--resume-bg);
+  box-shadow: 0 0 15px var(--resume-shadow);
+  color: var(--resume-text-primary);
+}
+
+/* =======================
+   HEADER
+========================= */
 .container.resume header {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
-  border-bottom: 2px solid #0077cc;
   padding-bottom: 15px;
   margin-bottom: 25px;
+  transition: border-color 0.3s ease;
+  border-bottom: 2px solid var(--resume-blue-primary);
 }
 
 .container.resume header h1 {
   font-size: 2.5rem;
   margin: 0;
-  color: #0077cc;
+  transition: color 0.3s ease;
+  color: var(--resume-blue-primary);
 }
 
 .container.resume header p.subtitle {
   margin: 4px 0 0;
   font-weight: 600;
-  color: #555;
+  transition: color 0.3s ease;
+  color: var(--resume-text-secondary);
+}
+
+/* Styling for the new contact info line in the header */
+.container.resume header p.contact-info {
+  font-size: 0.95rem;
+  margin-top: 10px;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  justify-content: center;
+  transition: color 0.3s ease;
+  color: var(--resume-text-secondary);
+}
+
+.container.resume header p.contact-info a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+  color: var(--resume-blue-primary);
+}
+
+.container.resume header p.contact-info a:hover {
+  transition: color 0.3s ease;
+  color: var(--resume-blue-secondary);
 }
 
 /* Profile Image */
@@ -39,35 +264,48 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #0077cc;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  border: 3px solid var(--resume-blue-primary);
+  box-shadow: 0 0 8px var(--resume-shadow);
 }
 
-/* Section Titles */
+/* =======================
+   SECTION TITLES
+========================= */
 section h2 {
-  color: #0077cc;
-  border-bottom: 2px solid #0077cc;
   padding-bottom: 5px;
   margin-bottom: 15px;
   font-size: 1.8rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  color: var(--resume-blue-primary);
+  border-bottom: 2px solid var(--resume-blue-primary);
 }
 
-/* Subheadings */
+/* =======================
+   SUBHEADINGS (e.g., skill categories, job titles)
+========================= */
 h3 {
-  color: #004a99;
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 1.4rem;
+  transition: color 0.3s ease;
+  color: var(--resume-blue-secondary);
 }
 
-/* Paragraphs */
+/* =======================
+   PARAGRAPHS
+========================= */
 section p {
   line-height: 1.6;
   margin-bottom: 15px;
   font-size: 1rem;
+  transition: color 0.3s ease;
+  color: var(--resume-text-primary);
 }
 
-/* Lists */
+/* =======================
+   LISTS
+========================= */
 section ul {
   list-style-type: disc;
   padding-left: 20px;
@@ -78,149 +316,236 @@ section ul {
 section ul li {
   margin-bottom: 6px;
   line-height: 1.5;
+  transition: color 0.3s ease;
+  color: var(--resume-text-primary);
 }
 
-/* Strong text inside sections */
-section p strong {
+/* =======================
+   STRONG TEXT INSIDE SECTIONS
+========================= */
+section p strong, section ul li strong {
   font-weight: 700;
-  color: #004a99;
+  transition: color 0.3s ease;
+  color: var(--resume-blue-secondary);
 }
 
-/* Buttons */
-button {
-  background-color: #0077cc;
-  color: #fff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+/* =======================
+   NEW: SKILLS CATEGORY STYLING
+========================= */
+.skills-category {
+  margin-top: 25px;
+  margin-bottom: 20px;
 }
 
-button:hover {
-  background-color: #005fa3;
+.skills-category h3 {
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  transition: border-color 0.3s ease;
+  border-bottom: 1px solid var(--resume-blue-secondary);
 }
 
-/* Responsive Tweaks */
-@media (max-width: 768px) {
-  .container.resume {
+/* =======================
+   NEW: JOB/EDUCATION ENTRY STYLING
+========================= */
+.job-entry, .education-entry {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  transition: border-color 0.3s ease;
+  border-bottom: 1px dashed var(--resume-text-secondary);
+}
+
+.job-entry:last-child, .education-entry:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.job-dates, .education-dates {
+  font-size: 0.9rem;
+  margin-top: -5px;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+  color: var(--resume-text-secondary);
+}
+
+/* =======================
+   RESPONSIVE TWEAKS
+========================= */
+@media (max-width: 1200px) {
+  .resume-grid-container {
+    grid-template-columns: 1fr minmax(500px, 800px) 1fr;
+    gap: 20px;
+  }
+  .resume-sidebar {
     padding: 15px;
+    gap: 20px;
   }
-
-  .container.resume header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .container.resume header img {
-    width: 100px;
-    height: 100px;
-  }
-
-  section h2 {
-    font-size: 1.5rem;
-  }
-
-  h3 {
+  .resume-sidebar h3 {
     font-size: 1.2rem;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 992px) {
+  .resume-grid-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 768px;
+  }
+  .resume-sidebar {
+    min-height: auto;
+    width: 100%;
+    order: 1;
+  }
+  .resume-sidebar.left-sidebar {
+    order: 1;
+  }
+  .resume-sidebar.right-sidebar {
+    order: 3;
+  }
   .container.resume {
-    overflow-x: auto;
+    order: 2;
+    margin: 0 auto;
+  }
+  .pdf-button-container {
+    max-width: 768px;
   }
 }
 
-/* Optional Dark Mode via Class */
-.dark-mode .container.resume {
-  background: #1e1e1e;
-  color: #f2f2f2;
+@media (max-width: 768px) {
+  .resume-page-wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .pdf-button-container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+  .container.resume {
+    padding: 20px 25px;
+  }
+  .container.resume header {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .container.resume header p.contact-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .container.resume header img {
+    width: 100px;
+    height: 100px;
+  }
+  section h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  section p, section ul li {
+    font-size: 0.95rem;
+  }
+  .resume-sidebar {
+    padding: 15px 20px;
+  }
+  .resume-sidebar h3 {
+    font-size: 1.1rem;
+  }
 }
 
-.dark-mode .container.resume header h1,
-.dark-mode section h2,
-.dark-mode h3,
-.dark-mode section p strong {
-  color: #66b2ff;
+@media (max-width: 500px) {
+  .resume-page-wrapper {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .pdf-button-container {
+    padding: 0 10px;
+  }
+  .container.resume {
+    padding: 15px 20px;
+  }
+  .container.resume header h1 {
+    font-size: 2rem;
+  }
+  .container.resume header p.subtitle {
+    font-size: 0.9rem;
+  }
+  section h2 {
+    font-size: 1.3rem;
+  }
+  h3 {
+    font-size: 1.1rem;
+  }
+  section ul {
+    padding-left: 15px;
+  }
+  .resume-sidebar {
+    padding: 10px 15px;
+    gap: 15px;
+  }
+  .resume-sidebar h3 {
+    font-size: 1rem;
+  }
 }
 
-.dark-mode .container.resume header p.subtitle {
-  color: #ccc;
-}
-
-.dark-mode .container.resume header img {
-  border-color: #66b2ff;
-}
-
-.dark-mode button {
-  background-color: #3399ff;
-  color: #000;
-}
-
-.dark-mode button:hover {
-  background-color: #1a8cff;
-}
-
-/* Contact Section */
-.contact-container {
-  margin-bottom: 40px;
-}
-
-.contact-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.contact-avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #007bff;
-  margin-top: 10px;
-}
-
-.contact-info ul {
-  list-style: none;
-  padding: 0;
-  line-height: 1.8;
-}
-
-.contact-info li {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  word-break: break-word;
-}
-
-/* Links */
-.container.resume a {
-  color: #0077cc;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.container.resume a:hover {
-  color: #004a99;
-  text-decoration: underline;
-}
-
-/* Print Optimization */
+/* =======================
+   PRINT OPTIMIZATION
+========================= */
 @media print {
   body {
     background: #fff;
     color: #000;
   }
 
-  .container.resume {
-    box-shadow: none;
-    padding: 0;
+  .resume-page-wrapper {
+    padding: 0 !important;
+    background: #fff !important;
+    display: block !important; /* Revert to block for print */
+    min-height: auto !important;
   }
 
-  button {
-    display: none;
+  .pdf-button-container,
+  .resume-sidebar {
+    display: none !important; /* Hide sidebars and button for print */
+  }
+
+  .resume-grid-container {
+    display: block !important; /* Revert grid to block for print */
+    width: auto !important;
+    max-width: none !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+
+  .container.resume {
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    border: none !important;
+  }
+
+  /* Ensure all text is black for print */
+  .container.resume,
+  .container.resume header h1,
+  .container.resume header p.subtitle,
+  section h2,
+  h3,
+  section p,
+  section ul li,
+  section p strong,
+  section ul li strong,
+  .container.resume a {
+    color: #000 !important;
+  }
+  /* Ensure borders are black for print */
+  .container.resume header,
+  section h2 {
+    border-color: #000 !important;
+  }
+  .job-entry, .education-entry {
+    border-color: #ccc !important; /* Lighter dashed border for print */
   }
 }
