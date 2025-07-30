@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css"; // Ensure your CSS is correctly linked
-import {
-  FaLaptopCode,
-  FaMobileAlt,
-  FaMicrochip,
-  FaBookOpen,
-  FaCloudSun,
-  FaNetworkWired,
-  FaChartPie,
-  FaBitcoin, // Added for CryptoChart project
-  FaLinkedinIn // Added for LinkedIn profile
-} from "react-icons/fa"; // Ensure all necessary icons are imported
-
 import { allProjects } from './Projects'; // Import allProjects from the centralized data file
 
 export default function Home() {
