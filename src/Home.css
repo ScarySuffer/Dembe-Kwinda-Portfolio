@@ -1,146 +1,229 @@
-/* Home.css */
-
-.project-container {
+/* src/Home.css */
+/* Ensure body takes up full screen with no scrollbars unless necessary */
+html, body {
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: auto;
+}
+
+/* Prevent unwanted extra spacing */
+body {
   margin: 0;
-  padding: 20px 30px;
-  box-sizing: border-box;
+  padding: 0;
+}
+
+/* =======================
+   THEME VARIABLES FOR HOME PAGE
+   Light Mode is the default defined here using generic variable names.
+========================= */
+:root {
+  --home-bg-color: #f8f9fa; /* Light background for the overall page */
+  --home-text-color: #333;
+  --home-header-color: #003366; /* Dark blue for main headings */
+  --home-section-title-color: #004080; /* Slightly lighter blue for section titles */
+  --home-card-bg: #ffffff; /* Background for project cards */
+  --home-card-shadow: rgba(0, 0, 0, 0.05);
+  --home-card-hover-shadow: rgba(0, 0, 0, 0.12);
+  --home-button-bg: #007bff; /* Primary button blue */
+  --home-button-hover: #0056b3; /* Darker blue on hover */
+  --home-tech-badge-bg: #e0e0e0; /* Light grey for tech badges */
+  --home-tech-badge-color: #333; /* Dark text for tech badges */
+  --home-link-color: #007bff; /* Link color */
+  --home-link-hover-color: #0056b3; /* Link hover color */
+}
+
+/* Dark Mode Overrides - these variables will redefine the generic names
+   when the .dark-mode class is active on a parent element (e.g., body). */
+body.dark-mode {
+  --home-bg-color: #1a1a1a;
+  --home-text-color: #e0e0e0;
+  --home-header-color: #66b2ff;
+  --home-section-title-color: #3399ff;
+  --home-card-bg: #2a2a2a;
+  --home-card-shadow: rgba(255, 255, 255, 0.05);
+  --home-card-hover-shadow: rgba(255, 255, 255, 0.12);
+  --home-button-bg: #3399ff;
+  --home-button-hover: #1a8cff;
+  --home-tech-badge-bg: #444; /* Darker grey for tech badges in dark mode */
+  --home-tech-badge-color: #eee; /* Lighter text for tech badges */
+  --home-link-color: #66b2ff;
+  --home-link-hover-color: #3399ff;
+}
+
+/* =======================
+   BASE STYLES (applies to both themes, or sets defaults)
+========================= */
+html, body, #root {
+  height: 100%; /* Ensures these elements take full height */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #222;
-  overflow-y: auto;
+  /* Apply theme variables directly from :root or .dark-mode override */
+  background-color: var(--home-bg-color);
+  color: var(--home-text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Main container for the Home page - now takes full viewport height */
+.home-page-container { /* Renamed from .project-container for clarity */
+  width: 100vw;                  /* Takes full viewport width */
+  height: 100vh;                 /* Enforces full viewport height */
+  margin: 0;
+  padding: 40px 30px;           /* Spacious padding */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fff; /* clean background */
+  overflow-y: auto;             /* Enables scrolling if content exceeds screen */
+  overflow-x: hidden;           /* Prevents horizontal scroll */
+  background-color: var(--home-bg-color);
+  color: var(--home-text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.project-header {
+
+.home-header { /* Renamed from .project-header for clarity */
   display: flex;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 30px;
+  gap: 30px; /* Increased gap */
+  margin-bottom: 50px; /* Increased margin-bottom for more separation */
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px; /* Increased max-width for desktop */
+  padding: 0 20px; /* Add padding to prevent content from touching edges */
+  box-sizing: border-box;
   transition: gap 0.3s ease;
 }
 
-.project-header img {
-  width: 100px;
-  height: 100px;
+.home-header img {
+  width: 120px; /* Slightly larger default image */
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 8px var(--home-card-shadow); /* Slightly stronger shadow */
   transition: box-shadow 0.3s ease;
 }
 
-.project-header h1 {
-  font-size: 1.8rem;
+.home-header h1 {
+  font-size: 3rem; /* Larger font for desktop */
   margin: 0;
-  color: #003366;
+  color: var(--home-header-color);
 }
 
-.project-header p {
-  margin: 4px 0 0 0;
-  font-size: 1rem;
-  color: #555;
+.home-header p {
+  margin: 8px 0 0 0; /* Increased margin */
+  font-size: 1.4rem; /* Larger font for desktop */
+  color: var(--home-text-color);
 }
 
 .section {
-  margin-top: 20px;
+  margin-top: 60px; /* Increased margin-top for more spacing between sections */
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px; /* Increased max-width for desktop */
+  padding: 0 20px; /* Add padding */
+  box-sizing: border-box;
 }
 
 .section h2 {
-  font-size: 1.6rem;
-  color: #004080;
-  border-bottom: 2px solid #004080;
-  padding-bottom: 5px;
-  margin-bottom: 15px;
+  font-size: 2.2rem; /* Larger font for desktop */
+  color: var(--home-section-title-color);
+  border-bottom: 2px solid var(--home-section-title-color);
+  padding-bottom: 8px; /* Increased padding */
+  margin-bottom: 25px; /* Increased margin-bottom */
 }
 
 .section.about p {
-  font-size: 1rem;
-  line-height: 1.5;
-  max-width: 650px;
-  margin: 0 auto; /* center text if narrower */
+  font-size: 1.15rem; /* Larger font for desktop */
+  line-height: 1.7; /* Increased line height for readability */
+  max-width: 800px; /* Adjusted max-width for about text */
+  margin: 0 auto; /* Center text if narrower */
+  text-align: center; /* Center align about text */
 }
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly larger minmax for desktop */
+  gap: 35px; /* Increased gap */
 }
 
 .project-card {
-  background: #fafafa;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  background: var(--home-card-bg);
+  border-radius: 10px; /* More rounded corners */
+  padding: 25px; /* Increased padding */
+  box-shadow: 0 0 8px var(--home-card-shadow); /* Slightly stronger shadow */
   display: flex;
   flex-direction: column;
   transition: box-shadow 0.5s ease, transform 0.3s ease;
+  text-align: center; /* Center content within cards */
 }
 
 .project-card:hover,
 .project-card:focus-within {
-  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.12);
-  transform: translateY(-4px);
+  box-shadow: 0 4px 18px var(--home-card-hover-shadow); /* Stronger hover shadow */
+  transform: translateY(-6px); /* More pronounced lift effect */
   outline: none;
 }
 
 .project-image {
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 20px; /* Increased margin */
   width: 100%;
   height: auto;
   object-fit: cover;
   user-select: none;
 }
 
+.project-card-icon { /* Style for icons from allProjects */
+  font-size: 4.5rem; /* Larger icon size */
+  margin-bottom: 20px;
+  color: var(--home-header-color);
+}
+
 .project-card h3 {
-  font-size: 1.3rem;
-  margin: 0 0 8px 0;
-  color: #0066cc;
+  font-size: 1.6rem; /* Larger font */
+  margin: 0 0 12px 0;
+  color: var(--home-section-title-color);
 }
 
 .project-card p {
-  font-size: 0.95rem;
-  color: #333;
+  font-size: 1.05rem; /* Slightly larger font */
+  color: var(--home-text-color);
   flex-grow: 1;
-  margin-bottom: 10px;
+  margin-bottom: 20px; /* Increased margin */
 }
 
 .tech-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 12px;
+  gap: 10px; /* Increased gap */
+  margin-top: auto; /* Push to bottom */
+  margin-bottom: 20px; /* Increased margin */
+  justify-content: center; /* Center tech tags */
 }
 
 .tech-badge {
-  background-color: #007bff;
-  color: white;
-  font-size: 0.75rem;
-  padding: 4px 10px;
-  border-radius: 4px;
+  background-color: var(--home-tech-badge-bg);
+  color: var(--home-tech-badge-color);
+  font-size: 0.9rem; /* Slightly larger font */
+  padding: 8px 15px; /* Increased padding */
+  border-radius: 6px; /* More rounded */
   user-select: none;
 }
 
 .project-links {
-  margin-top: auto;
+  margin-top: 25px; /* More space above buttons */
   display: flex;
-  gap: 10px;
+  gap: 20px; /* Increased gap */
   flex-wrap: wrap;
+  justify-content: center; /* Center buttons */
 }
 
 .view-button {
-  background-color: #007bff;
+  background-color: var(--home-button-bg);
   color: white;
-  padding: 7px 16px;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  padding: 12px 25px; /* Larger buttons */
+  border-radius: 6px; /* More rounded */
+  font-size: 1.05rem; /* Larger font */
   font-weight: 600;
   border: none;
   text-decoration: none;
@@ -149,12 +232,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25); /* Stronger subtle shadow */
 }
 
 .view-button:hover,
 .view-button:focus {
-  background-color: #0056b3;
-  box-shadow: 0 4px 12px rgba(0, 86, 179, 0.5);
+  background-color: var(--home-button-hover);
+  box-shadow: 0 6px 16px rgba(0, 86, 179, 0.6); /* Stronger hover shadow */
   outline: none;
 }
 
@@ -165,29 +249,29 @@
 .view-button.github:hover,
 .view-button.github:focus {
   background-color: #000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.85); /* Stronger hover shadow */
   outline: none;
 }
 
 .section.connect {
-  margin-top: 50px;
+  margin-top: 80px; /* More space for connect section */
   text-align: center;
 }
 
 .section.connect h2 {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 .section.connect a.view-button {
-  padding: 8px 20px;
-  font-size: 1rem;
+  padding: 15px 30px; /* Larger button */
+  font-size: 1.2rem;
 }
 
 /* Animation */
 @keyframes fadeSlideUpCard {
   0% {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(30px); /* More pronounced slide up effect */
   }
   100% {
     opacity: 1;
@@ -199,57 +283,237 @@
 .profile-image {
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-  transition: width 0.5s ease, height 0.5s ease, box-shadow 0.5s ease, margin-right 0.5s ease;
-  margin-right: 20px;
+  box-shadow: 0 0 8px var(--home-card-shadow);
+  transition: width 0.5s ease, height 0.5s ease, box-shadow 0.5s ease, margin 0.5s ease; /* Adjusted transition for margin */
   flex-shrink: 0;
 }
 
-/* Large image initially */
+/* Large image initially (for desktop) */
 .profile-image.large {
-  width: 300px;
-  height: 300px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  width: 250px; /* Adjusted large size */
+  height: 250px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3); /* Stronger shadow for large */
+  margin-right: 30px; /* Consistent margin for large */
 }
 
 /* Shrunk image after scroll */
 .profile-image.small {
-  width: 100px;
-  height: 100px;
-  margin-right: 15px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  width: 90px; /* Slightly smaller shrunk size */
+  height: 90px;
+  margin-right: 20px; /* Adjusted margin */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15); /* Adjusted shadow */
 }
 
-/* Responsive tweak for smaller screens */
-@media (max-width: 600px) {
-  .project-container {
-    padding: 15px 20px;
-  }
+/* =======================
+   RESPONSIVE TWEAKS
+========================= */
 
-  .project-header {
+/* Tablet and smaller desktop screens */
+@media (max-width: 1200px) {
+  .home-page-container {
+    padding: 30px 25px;
+  }
+  .home-header {
+    max-width: 900px;
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+  .home-header h1 {
+    font-size: 2.5rem;
+  }
+  .home-header p {
+    font-size: 1.3rem;
+  }
+  .section {
+    max-width: 900px;
+    margin-top: 50px;
+  }
+  .section h2 {
+    font-size: 2rem;
+  }
+  .section.about p {
+    font-size: 1.1rem;
+  }
+  .project-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+  .project-card {
+    padding: 20px;
+  }
+  .project-card-icon {
+    font-size: 4rem;
+  }
+  .project-card h3 {
+    font-size: 1.5rem;
+  }
+  .project-card p {
+    font-size: 1rem;
+  }
+  .tech-tags {
+    gap: 8px;
+  }
+  .tech-badge {
+    font-size: 0.85rem;
+    padding: 7px 14px;
+  }
+  .project-links {
+    gap: 15px;
+  }
+  .view-button {
+    padding: 10px 22px;
+    font-size: 1rem;
+  }
+  .section.connect {
+    margin-top: 60px;
+  }
+  .section.connect a.view-button {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+  }
+  .profile-image.large {
+    width: 200px;
+    height: 200px;
+    margin-right: 25px;
+  }
+  .profile-image.small {
+    width: 80px;
+    height: 80px;
+    margin-right: 18px;
+  }
+}
+
+/* Mobile and smaller tablet screens */
+@media (max-width: 768px) {
+  .home-page-container {
+    padding: 20px 15px;
+  }
+  .home-header {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 0 10px;
   }
-
   .profile-image.large,
   .profile-image.small {
-    width: 120px !important;
-    height: 120px !important;
-    margin: 0 0 10px 0 !important;
+    width: 150px !important; /* Smaller on mobile */
+    height: 150px !important;
+    margin: 0 0 15px 0 !important; /* Center image on top */
   }
-
-  .project-header h1 {
-    font-size: 1.5rem;
+  .home-header h1 {
+    font-size: 2.2rem;
     text-align: center;
   }
-
-  .project-header p {
+  .home-header p {
+    font-size: 1.1rem;
     text-align: center;
+  }
+  .section {
+    padding: 0 10px;
+    margin-top: 40px;
+  }
+  .section h2 {
+    font-size: 1.8rem;
+  }
+  .section.about p {
+    font-size: 0.95rem;
+  }
+  .project-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 25px;
+  }
+  .project-card {
+    padding: 18px;
+  }
+  .project-card-icon {
+    font-size: 3.5rem;
+  }
+  .project-card h3 {
+    font-size: 1.4rem;
+  }
+  .project-card p {
     font-size: 0.9rem;
   }
-
-  .project-grid {
-    grid-template-columns: 1fr !important;
+  .tech-tags {
+    gap: 6px;
   }
+  .tech-badge {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+  .project-links {
+    gap: 10px;
+  }
+  .view-button {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+  }
+  .section.connect {
+    margin-top: 50px;
+  }
+  .section.connect a.view-button {
+    padding: 10px 22px;
+    font-size: 1rem;
+  }
+}
+
+/* =======================
+   PRINT OPTIMIZATION
+========================= */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact; /* Ensure background colors print */
+    print-color-adjust: exact;
+  }
+  .home-page-container {
+    padding: 0 !important;
+    background: #fff !important;
+    display: block !important;
+    min-height: auto !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  .home-header, .section, .project-grid, .project-card, .project-links, .tech-tags {
+    box-shadow: none !important;
+    border: none !important;
+    color: #000 !important;
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    width: auto !important;
+    display: block !important;
+  }
+  .home-header h1, .home-header p, .section h2, .project-card h3, .project-card p, .tech-badge, .view-button {
+    color: #000 !important;
+  }
+  .home-header img, .project-image, .project-card-icon {
+    display: none !important; /* Hide images/icons in print for simplicity */
+  }
+  .view-button {
+    text-decoration: underline !important;
+    background-color: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+  }
+  .view-button.github {
+    background-color: transparent !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+  }
+  .tech-badge {
+    border: 1px solid #ccc !important;
+    background-color: #eee !important;
+    color: #333 !important;
+  }
+  /* Ensure proper spacing for print */
+  .home-header { margin-bottom: 8mm !important; }
+  .section { margin-top: 15mm !important; margin-bottom: 10mm !important; }
+  .project-card { margin-bottom: 6mm !important; }
+  .project-grid { display: block !important; }
+  .project-links { margin-top: 8mm !important; }
 }

@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css";
+import "./Home.css"; // Ensure your CSS is correctly linked
+import {
+  FaLaptopCode,
+  FaMobileAlt,
+  FaMicrochip,
+  FaBookOpen,
+  FaCloudSun,
+  FaNetworkWired,
+  FaChartPie,
+  FaBitcoin, // Added for CryptoChart project
+  FaLinkedinIn // Added for LinkedIn profile
+} from "react-icons/fa"; // Ensure all necessary icons are imported
+
+import { allProjects } from './Projects'; // Import allProjects from the centralized data file
 
 export default function Home() {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    // This part handles theme, ensure it's consistent with your ThemeContext if used globally
     const savedTheme = localStorage.getItem("theme") || "light";
     document.body.classList.toggle("dark-mode", savedTheme === "dark");
     document.body.classList.toggle("light-mode", savedTheme !== "dark");
@@ -19,97 +33,16 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const projects = [
-    {
-      title: "DynamicGen Holdings E-commerce",
-      description:
-        "Full-featured React e-commerce site for auto spare parts with filters, product pages, and Firebase integration.",
-      url: "https://dynamicgenholdings-16794.web.app/",
-      image: "/images/projects/dynamicgen.png",
-      tech: ["React", "Firebase", "Bootstrap"],
-      github: null,
-    },
-    {
-      title: "Budgetly – Personal Finance Tracker",
-      description:
-        "A modern budgeting app to manage income, expenses, and savings with intuitive charts. Frontend hosted on Netlify; backend API deployed on Heroku.",
-      url: "https://kasi-budgetly.netlify.app/",
-      image: "/images/projects/budgetly.png",
-      tech: ["React", "Node.js", "Express", "Chart.js", "Netlify", "Heroku"],
-      github: "https://github.com/Kasi-Digital-Budgetly/budgetly-finance-tracker",
-    },
-    {
-      title: "Crypto Price Tracker with ETL + Dashboard",
-      description:
-        "A full-stack dashboard tracking real-time crypto prices and historical trends with ETL pipeline and chart visualizations.",
-      url: "http://13.48.59.188",
-      image: "/images/projects/crypto.png",
-      tech: ["React", "Node.js", "SQLite", "Express", "Recharts", "ETL"],
-      github: "https://github.com/yourusername/crypto-price-tracker-etl",
-    },
-    {
-      title: "Weather Forecast App",
-      description:
-        "Real-time weather forecast app using OpenWeatherMap API and React.",
-      route: "/weather",
-      image: "/images/projects/weather.png",
-      tech: ["React", "OpenWeatherMap API"],
-    },
-    {
-      title: "Arduino Robotics & Automation",
-      description:
-        "Embedded systems using sensors, actuators, and Arduino to automate mechanical processes.",
-      route: "/coming-soon",
-      image: "/images/projects/arduino.png",
-      tech: ["Arduino", "C++", "Sensors"],
-    },
-    {
-      title: "Flutter Mobile Apps",
-      description:
-        "Cross-platform mobile apps built with Flutter and Firebase for authentication and real-time databases.",
-      route: "/coming-soon",
-      image: "/images/projects/My APP.png",
-      tech: ["Flutter", "Dart", "Firebase"],
-    },
-    {
-      title: "Full-Stack Web Development",
-      description:
-        "Responsive websites and REST APIs using React, Node.js, Express, and MongoDB.",
-      route: "/coming-soon",
-      image: "/images/projects/fullstack.png",
-      tech: ["MERN", "REST API"],
-    },
-    {
-      title: "Embedded Systems Programming",
-      description:
-        "Microcontroller programming for sensor acquisition and logic control in IoT and mechatronics.",
-      route: "/coming-soon",
-      image: "/images/projects/embedded.png",
-      tech: ["C", "IoT", "Microcontrollers"],
-    },
-    {
-      title: "OpenStreetMap Integration",
-      description:
-        "Location-aware mobile apps with OpenStreetMap and Flutter Map for real-time tracking and mapping.",
-      route: "/coming-soon",
-      image: "/images/projects/openstreetmap.png",
-      tech: ["Flutter", "OpenStreetMap", "Geolocation"],
-    },
-    {
-      title: "Bookverse",
-      description:
-        "A book discovery and review platform that connects readers through community-driven experiences.",
-      route: "/coming-soon",
-      image: "/images/projects/open-book.png",
-      tech: ["React", "MongoDB", "Node.js"],
-    },
-  ];
+  // Filter out the LinkedIn Profile from projects displayed on the Home page,
+  // as it's typically handled separately or not as a "project" for this section.
+  const highlightedProjects = allProjects.filter(project => project.title !== "LinkedIn Profile");
+
 
   return (
-    <main className="project-container">
-      <header className="project-header" role="banner">
+    <main className="home-page-container"> {/* This class is styled for full-screen in Home.css */}
+      <header className="home-header" role="banner">
         <img
-          src="/dembe.jpg"
+          src="/images/projects/dembe.jpg" // Updated to consistent asset path
           alt="Dembe Kwinda"
           className={`profile-image ${scrolled ? "small" : "large"}`}
           loading="lazy"
@@ -137,9 +70,9 @@ export default function Home() {
       >
         <h2 id="highlighted-projects-heading">Highlighted Projects</h2>
         <div className="project-grid" role="list">
-          {projects.map(
+          {highlightedProjects.map( // Use filtered projects here
             (
-              { title, description, url, route, image, tech, github },
+              { title, description, url, route, image, tech, github, icon }, // Include icon from allProjects
               index
             ) => (
               <article
@@ -155,12 +88,17 @@ export default function Home() {
                   animationDelay: `${index * 0.1}s`,
                 }}
               >
-                <img
-                  src={image}
-                  alt={`Screenshot of ${title}`}
-                  className="project-image"
-                  loading="lazy"
-                />
+                {/* Use the icon from the allProjects data if available, otherwise fallback to image */}
+                {icon ? (
+                  <div className="project-card-icon">{icon}</div>
+                ) : (
+                  <img
+                    src={image}
+                    alt={`Screenshot of ${title}`}
+                    className="project-image"
+                    loading="lazy"
+                  />
+                )}
                 <h3>{title}</h3>
                 <p id={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}>
                   {description}
@@ -168,9 +106,10 @@ export default function Home() {
 
                 {tech && (
                   <div className="tech-tags" aria-label={`Technologies used in ${title}`} role="list">
-                    {tech.map((t) => (
-                      <span key={t} className="tech-badge" role="listitem">
-                        {t}
+                    {/* Ensure tech is a string to be split, as per your Projects.js data structure */}
+                    {tech.split('·').map((t) => (
+                      <span key={t.trim()} className="tech-badge" role="listitem">
+                        {t.trim()}
                       </span>
                     ))}
                   </div>

@@ -21,15 +21,7 @@ import "./Projects.css"; // CSS import
 // This array contains data for all projects, used across various components.
 // ===========================================================================
 export const allProjects = [ // <<< IMPORTANT: This 'export const' is crucial
-  {
-    title: "Crypto Price Tracker with ETL + Dashboard",
-    description:
-      "Built a full-stack crypto dashboard with scheduled ETL pipelines, historical charting, and real-time price tracking.",
-    url: "http://13.48.59.188",
-    tech: "Node.js · SQLite · Recharts · React · Express · WebSocket · Python",
-    category: "Data Science / Web",
-    icon: <FaBitcoin aria-label="Bitcoin Icon" role="img" />
-  },
+ 
   {
     title: "DynamicGen Holdings E-commerce",
     description:
@@ -48,6 +40,15 @@ export const allProjects = [ // <<< IMPORTANT: This 'export const' is crucial
     category: "Web Development",
     icon: <FaChartPie aria-label="Chart Pie Icon" role="img" />
   },
+   {
+    title: "Crypto Price Tracker with ETL + Dashboard",
+    description:
+      "Built a full-stack crypto dashboard with scheduled ETL pipelines, historical charting, and real-time price tracking.",
+    url: "http://13.48.59.188",
+    tech: "Node.js · SQLite · Recharts · React · Express · WebSocket · Python",
+    category: "Data Science / Web",
+    icon: <FaBitcoin aria-label="Bitcoin Icon" role="img" />
+  },
   {
     title: "Weather Forecast App",
     description:
@@ -61,7 +62,7 @@ export const allProjects = [ // <<< IMPORTANT: This 'export const' is crucial
     title: "Arduino Robotics & Automation",
     description:
       "Developed prototypes integrating sensors and actuators to automate mechanical processes.",
-    url: "https://github.com/yourusername/arduino-robotics",
+     route: "/coming-soon",
     tech: "Arduino · Sensors · Automation · C",
     category: "Engineering / Robotics",
     icon: <FaMicrochip aria-label="Microchip Icon" role="img" />
@@ -70,8 +71,7 @@ export const allProjects = [ // <<< IMPORTANT: This 'export const' is crucial
     title: "Flutter Mobile Apps",
     description:
       "Built cross-platform mobile applications with Flutter, integrating Firebase for backend services.",
-    url: "https://github.com/yourusername/flutter-mobile-apps",
-    tech: "Flutter · Firebase",
+  route: "/coming-soon",    tech: "Flutter · Firebase",
     category: "Mobile Development",
     icon: <FaMobileAlt aria-label="Mobile Icon" role="img" />
   },
@@ -79,7 +79,7 @@ export const allProjects = [ // <<< IMPORTANT: This 'export const' is crucial
     title: "Full-Stack Web Development",
     description:
       "Designed and implemented responsive websites and RESTful APIs using MERN stack.",
-    url: "https://github.com/yourusername/fullstack-web-development",
+    route: "/coming-soon",
     tech: "MERN · REST APIs · Node.js · Express · React · MongoDB",
     category: "Web Development",
     icon: <FaNetworkWired aria-label="Network Wired Icon" role="img" />
@@ -88,7 +88,7 @@ export const allProjects = [ // <<< IMPORTANT: This 'export const' is crucial
     title: "Embedded Systems Programming",
     description:
       "Programmed microcontrollers (Arduino) for sensor data acquisition and device control.",
-    url: "https://github.com/yourusername/embedded-systems",
+    route: "/coming-soon",
     tech: "Embedded C · Arduino",
     category: "Engineering / Embedded",
     icon: <FaMicrochip aria-label="Microchip Icon" role="img" />
@@ -97,7 +97,7 @@ export const allProjects = [ // <<< IMPORTANT: This 'export const' is crucial
     title: "OpenStreetMap Integration",
     description:
       "Implemented geolocation in mobile apps using OpenStreetMap for enhanced navigation.",
-    url: "https://github.com/yourusername/openstreetmap-integration",
+    route: "/coming-soon",
     tech: "Geolocation · OSM · Flutter",
     category: "Mobile Development",
     icon: <FaMobileAlt aria-label="Mobile Icon" role="img" />
@@ -106,7 +106,7 @@ export const allProjects = [ // <<< IMPORTANT: This 'export const' is crucial
     title: "Bookverse",
     description:
       "Created a platform for readers to discover, review, and share books.",
-    url: "https://github.com/yourusername/bookverse",
+    route: "/coming-soon",
     tech: "React · Node.js · MongoDB",
     category: "Web Development",
     icon: <FaBookOpen aria-label="Book Open Icon" role="img" />
@@ -114,7 +114,7 @@ export const allProjects = [ // <<< IMPORTANT: This 'export const' is crucial
   {
     title: "LinkedIn Profile",
     description: "Connect with me on LinkedIn for more updates.",
-    url: "https://www.linkedin.com/in/dembekwinda",
+    url: "https://www.linkedin.com/in/dembe-kwinda-4461b4237",
     tech: "Professional Network",
     category: "Professional",
     icon: <FaLinkedinIn aria-label="LinkedIn Icon" role="img" />
